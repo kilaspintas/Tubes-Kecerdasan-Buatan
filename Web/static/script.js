@@ -16,16 +16,10 @@ var btnUpload = $("#upload_file"),
 			setTimeout(function(){
 				btnOuter.addClass("file_uploaded");
 			},3000);
-			setInterval(() => {
-        		$.getJSON(                            
-            	$SCRIPT_ROOT + "/update",      
-            	{},                                
-            	function(data)                    
-            	{
-					alert(data)
-              		$("#ekspresi").text(data.result);                               
-            	});
-    		},500);  
+			$.getJSON('/update', function(data){
+				$("#ekspresi").text('Ekspresi : '+data.ekspresi);
+				$("#rating").text('Rating : '+data.rating);
+			})                        
 			var uploadedFile = URL.createObjectURL(e.target.files[0]);
 			setTimeout( function(){
 				$("#uploaded_view").append('<img src="'+uploadedFile+'" />').addClass("show");

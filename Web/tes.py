@@ -8,7 +8,8 @@ from PIL import Image
 app = Flask(__name__)
 
 hasil = {
-    'result' : 'ada'
+    'ekspresi' : 'ada',
+    'rating' : 'ada'
     }
 face_classifier = cv2.CascadeClassifier(r'haarcascade_frontalface_default.xml')
 classifier =load_model(r'100.h5')
@@ -19,7 +20,6 @@ camera = cv2.VideoCapture(0)
 def sumberVideo():
    while True:
     _, frame = camera.read()
-    labels = []
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
     faces = face_classifier.detectMultiScale(gray)
 
@@ -50,7 +50,6 @@ def deteksiGambar():
     frame = cv2.imread('aset.jpg')
 
     while True:
-        labels = []
         gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
         faces = face_classifier.detectMultiScale(gray)
 
@@ -65,7 +64,12 @@ def deteksiGambar():
 
                 prediction = classifier.predict(roi)[0]
                 label=emotion_labels[prediction.argmax()]
-                hasil['result'] = label
+                if(label == 'sedih'):
+                    hasil['rating'] = 'buruk'
+                elif(label == 'senang'):
+                    hasil['rating'] = 'bagus'
+
+                hasil['ekspresi'] = label
                 label_position = (x,y)
                 cv2.putText(frame,label,label_position,cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,0),2)
             else:

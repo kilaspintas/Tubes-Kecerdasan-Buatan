@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='program.css') }}">
-    <title>Document</title>
+    <title>Upload</title>
 </head>
 <body>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -24,9 +24,9 @@
 		<div class="error_msg"></div>
 		<div class="uploaded_file_view" id="uploaded_view">
 			<span class="file_remove">X</span>
-            <h1>Ekspresi : </h1>
+            <h2 id="ekspresi"></h2>
             <span></span>
-            <h2>Rating : </h2>
+            <h2 id="rating"> </h2>
 		</div>
 	</div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
